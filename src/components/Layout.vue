@@ -9,7 +9,7 @@
                                 <Tools />
                             </el-icon>
                             <el-select v-model="selectedValue" placeholder="请选择语言"
-                                :class="['custom-select', isActive ? 'light-select' : 'dark-select']"
+                                :class="['custom-select', isActive ? 'light-theme' : 'dark-theme']"
                                 style="width: 200px;">
                                 <el-option v-for="item in options" :key="item.value" :label="item.label"
                                     :value="item.value" :disabled="item.disabled" />
@@ -100,45 +100,48 @@ const toggleActive = (value) => {
 }
 
 .icon-select-container {
-    height: 100%;
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
 .icon-select-container .el-icon {
     margin-right: 8px;
+    display: flex;
+    align-items: center;
 }
 
 .custom-select {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.light-select {
+:deep(.light-theme .el-select__wrapper) {
     background-color: #fff;
     color: #333;
 }
 
-.dark-select {
+:deep(.dark-theme .el-tooltip__trigger) {
     background-color: #333;
     color: #fff;
 }
 
-.dark-theme .el-select .el-input__inner {
+:deep(.dark-theme .el-select-dropdown) {
     background-color: #333;
     color: #fff;
 }
 
-.light-theme .el-select .el-input__inner {
+:deep(.light-theme .el-select-dropdown) {
     background-color: #fff;
     color: #333;
 }
 
-.dark-theme .el-select-dropdown {
+
+:deep(.dark-theme .el-select-dropdown__item) {
     background-color: #333;
     color: #fff;
 }
 
-.light-theme .el-select-dropdown {
+:deep(.light-theme .el-select-dropdown__item) {
     background-color: #fff;
     color: #333;
 }

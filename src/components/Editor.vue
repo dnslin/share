@@ -24,12 +24,12 @@ const MONACO_EDITOR_OPTIONS = {
     formatOnPaste: true,
 };
 
-const code = ref("_____ _                    \n" +
-    "/  ___| |                   \n" +
-    "\\ `--.| |__   __ _ _ __ ___ \n" +
-    " `--. \\ '_ \\ / _` | '__/ _ \\\n" +
-    "/\\__/ / | | | (_| | | |  __/\n" +
-    "\\____/|_| |_|\\__,_|_|  \\___|                 欢迎您使用Share分享代码 by-dnslin");
+const code = ref(`_____ _                    
+/  ___| |                   
+\\ \`--.| |__   __ _ _ __ ___ 
+ \`--. \\ '_ \\ / _\` | '__/ _ \\
+/\\__/ / | | | (_| | | |  __/
+/\\____/|_| |_|\\__,_|_|  \\___|                 欢迎您使用Share分享代码 by-dnslin`);
 const editorRef = shallowRef();
 const handleMount = (editor) => (editorRef.value = editor);
 

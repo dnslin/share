@@ -6,6 +6,7 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
 import ElementPlus from 'element-plus'
 import App from './App.vue'
 import './common.css'
+import './assets/main.css'
 
 loader.config({
     paths: {

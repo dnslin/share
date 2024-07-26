@@ -11,7 +11,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import Editor from './components/Editor.vue';
 import Layout from './components/Layout.vue';
 import Load from './components/Load.vue';
 const showLoader = ref(false);

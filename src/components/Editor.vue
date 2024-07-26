@@ -1,6 +1,6 @@
 <template>
-    <Editor height="800px" :theme="theme" :language="language" :value="code" :options="MONACO_EDITOR_OPTIONS"
-        @mount="handleMount" @change="formatCode" />
+    <Editor height="820px" :theme="theme" :language="language" :value="code" :options="MONACO_EDITOR_OPTIONS"
+        @mount="handleMount" @change="formatCode" className="editor-container" />
 </template>
 
 <script setup>

@@ -2,7 +2,7 @@
     <div :class="['common-layout', isActive ? 'light-theme' : 'dark-theme']">
         <el-container>
             <el-header :class="headerClasses">
-                <el-row class="items-center">
+                <el-row class="items-center header-row">
                     <el-col :span="2">
                         <div class="icon-select-container">
                             <el-icon>
@@ -26,7 +26,9 @@
                 </el-row>
             </el-header>
             <el-main :class="mainClasses">
-                <Editor :theme="editorTheme" :language="editorLanguage" />
+                <div class="editor-container">
+                    <Editor :theme="editorTheme" :language="editorLanguage" />
+                </div>
             </el-main>
         </el-container>
     </div>
@@ -51,15 +53,27 @@ const toggleActive = (value) => {
 }
 
 const headerClasses = computed(() => ({
-    'bg-gray-300 text-gray-800': !isActive.value,
-    'dark:bg-gray-800 dark:text-white': isActive.value,
-    'p-4': true,
+    'bg-gray-100 text-gray-900': isActive.value,
+    'bg-gray-900 text-gray-100': !isActive.value,
+    'p-2': true,
+    'shadow-sm': true,
+    'border-b': true,
+    'border-gray-300': isActive.value,
+    'border-gray-600': !isActive.value
 }))
 
 const mainClasses = computed(() => ({
-    'bg-white text-black': !isActive.value,
-    'dark:bg-gray-900 dark:text-white': isActive.value,
+    'bg-gray-100 text-gray-900': isActive.value,
+    'bg-gray-900 text-gray-100': !isActive.value,
     'p-4': true,
+    'shadow-inner': true,
+    'rounded-lg': true,
+    'border': true,
+    'border-gray-300': isActive.value,
+    'border-gray-600': !isActive.value,
+    'flex': true,
+    'flex-1': true,
+    'overflow-auto': true
 }))
 </script>
 
@@ -68,56 +82,152 @@ const mainClasses = computed(() => ({
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    width: 100vw;
+    /* 设置宽度为浏览器的宽度 */
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    padding: 0;
+    /* 移除内边距 */
 }
 
 .el-container {
     display: flex;
     flex-direction: column;
     flex: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background-color: var(--container-bg-color);
+    margin: 0 auto;
+    /* 居中对齐 */
+    width: 100%;
+    /* 使容器宽度占满父容器 */
 }
 
 .icon-select-container {
     display: flex;
     align-items: center;
+    padding: 0.25rem;
+    /* 调整内边距 */
+    border-radius: 8px;
+    background-color: var(--select-bg-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .custom-select {
     width: 12rem;
+    /* 调整宽度 */
     margin-left: 0.5rem;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-size: 0.875rem;
+    /* 调整字体大小 */
     transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    box-shadow: 0 1px 3px rgba(228, 224, 224, 0.281);
 }
 
 :deep(.el-select__wrapper) {
-    background: var(--main-bg-color) !important;
+    background: var(--select-bg-color) !important;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 :deep(.el-select-dropdown__wrap) {
-    background: var(--main-bg-color) !important;
+    background: var(--select-bg-color) !important;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-
 .light-theme {
-    --main-bg-color: #fff;
-    --header-bg-color: #f5f5f5;
+    --background-color: #f5f7fa;
+    --container-bg-color: #ffffff;
+    --select-bg-color: #EEF2F7;
+    --header-bg-color: #ffffff;
     --header-text-color: #333;
     --main-text-color: #333;
+    --button-bg-color: #007bff;
+    --button-text-color: #fff;
+    --button-hover-bg-color: #0069d9;
 }
 
 .dark-theme {
-    --main-bg-color: #2c2c2c;
+    --background-color: #181a1b;
+    --container-bg-color: #2c2c2c;
+    --select-bg-color: #3a3a3a;
     --header-bg-color: #333;
     --header-text-color: #fff;
     --main-text-color: #fff;
+    --button-bg-color: #28a745;
+    --button-text-color: #fff;
+    --button-hover-bg-color: #218838;
 }
 
 .el-header {
     background-color: var(--header-bg-color);
     color: var(--header-text-color);
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem;
+    /* 调整内边距 */
+}
+
+.header-row {
+    align-items: center;
+    /* 垂直居中 */
 }
 
 .el-main {
     background-color: var(--main-bg-color);
     color: var(--main-text-color);
     padding: 1rem;
+    border-radius: 0 0 8px 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    /* 使主内容区域占满剩余空间 */
+    flex-direction: column;
+    flex: 1;
+    overflow: auto;
+    /* 确保内容区域可滚动 */
+}
+
+.el-button {
+    background-color: var(--button-bg-color) !important;
+    color: var(--button-text-color) !important;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+.el-button:focus,
+.el-button:hover {
+    background-color: var(--button-hover-bg-color) !important;
+    transform: translateY(-2px);
+}
+
+.el-button[type="danger"] {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+}
+
+.el-button[type="danger"]:focus,
+.el-button[type="danger"]:hover {
+    background-color: #c82333 !important;
+}
+
+:deep(.editor-container) {
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: var(--main-bg-color);
+    flex: 1;
+    /* 使编辑器占满剩余空间 */
+    display: flex;
+    flex-direction: column;
 }
 </style>

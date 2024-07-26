@@ -190,7 +190,6 @@ const mainClasses = computed(() => ({
     flex-direction: column;
     flex: 1;
     overflow: auto;
-    /* 确保内容区域可滚动 */
 }
 
 .el-button {
@@ -222,7 +221,7 @@ const mainClasses = computed(() => ({
 
 :deep(.editor-container) {
     border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 4px rgba(24, 23, 23, 0.1);
     overflow: hidden;
     background-color: var(--main-bg-color);
     flex: 1;

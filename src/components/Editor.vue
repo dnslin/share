@@ -1,5 +1,5 @@
 <template>
-    <Editor height="820px" :theme="theme" :language="language" :value="code" :options="MONACO_EDITOR_OPTIONS"
+    <Editor height="850px" :theme="theme" :language="language" :value="code" :options="MONACO_EDITOR_OPTIONS"
         @mount="handleMount" @change="formatCode" className="editor-container" />
 </template>
 

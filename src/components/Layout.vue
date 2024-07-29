@@ -107,15 +107,11 @@ const openDeleteDialog = () => {
 const handleSubmit = () => {
     submitDialogVisible.value = false;
     ElMessage.success('提交成功');
-    // Add your submit logic here
-    console.log('Submitted with password:', submitPassword.value);
 };
 
 const handleDelete = () => {
     deleteDialogVisible.value = false;
     ElMessage.success('删除成功');
-    // Add your delete logic here
-    console.log('Deleted with password:', deletePassword.value);
 };
 </script>
 

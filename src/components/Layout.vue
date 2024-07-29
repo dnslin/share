@@ -272,29 +272,6 @@ const handleDelete = () => {
     flex-direction: column;
 }
 
-:deep(.custom-dialog) {
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    padding: 20px;
-    width: 30%;
-    margin: 0 auto;
-    margin-top: 20vh;
-
-}
-
-:deep(.custom-dialog .el-dialog__header) {
-    background-color: #2d8cf0;
-    color: white;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-:deep(.custom-dialog .el-dialog__footer) {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
 :deep(.el-dialog__body .el-input) {
     margin-bottom: 10px;
 }

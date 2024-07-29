@@ -16,8 +16,8 @@
                     </el-col>
                     <el-col :span="19"></el-col>
                     <el-col :span="2" class="flex justify-end">
-                        <el-button type="primary" class="mr-2">提交</el-button>
-                        <el-button type="danger">删除</el-button>
+                        <el-button type="primary" class="mr-2" @click="openSubmitDialog">提交</el-button>
+                        <el-button type="danger" @click="openDeleteDialog">删除</el-button>
                     </el-col>
                     <el-col :span="1" class="flex justify-center">
                         <el-switch inline-prompt :active-icon="dayIcon" :inactive-icon="darkIcon" v-model="isActive"
@@ -31,6 +31,21 @@
                 </div>
             </el-main>
         </el-container>
+        <el-dialog v-model="submitDialogVisible" title="请输入密码" width="30%" :modal=true custom-class="custom-dialog">
+            <el-input v-model="submitPassword" placeholder="密码" show-password />
+            <span slot="footer" class="footer-dialog">
+                <el-button @click="submitDialogVisible = false">取消</el-button>
+                <el-button type="primary" @click="handleSubmit">提交</el-button>
+            </span>
+        </el-dialog>
+
+        <el-dialog v-model="deleteDialogVisible" title="请输入密码" width="30%" :modal=true custom-class="custom-dialog">
+            <el-input v-model="deletePassword" placeholder="密码" show-password />
+            <span slot="footer" class="footer-dialog">
+                <el-button @click="deleteDialogVisible = false">取消</el-button>
+                <el-button type="danger" @click="handleDelete">删除</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -40,7 +55,7 @@ import Editor from './Editor.vue';
 import dayIcon from '../assets/day.svg?component';
 import darkIcon from '../assets/dark.svg?component';
 import languageList from '../const/language.js'
-
+import { ElMessage } from 'element-plus';
 const selectedValue = ref('')
 const options = languageList
 const editorTheme = ref('vs-dark')
@@ -75,6 +90,33 @@ const mainClasses = computed(() => ({
     'flex-1': true,
     'overflow-auto': true
 }))
+
+const submitDialogVisible = ref(false);
+const deleteDialogVisible = ref(false);
+const submitPassword = ref('');
+const deletePassword = ref('');
+
+const openSubmitDialog = () => {
+    submitDialogVisible.value = true;
+};
+
+const openDeleteDialog = () => {
+    deleteDialogVisible.value = true;
+};
+
+const handleSubmit = () => {
+    submitDialogVisible.value = false;
+    ElMessage.success('提交成功');
+    // Add your submit logic here
+    console.log('Submitted with password:', submitPassword.value);
+};
+
+const handleDelete = () => {
+    deleteDialogVisible.value = false;
+    ElMessage.success('删除成功');
+    // Add your delete logic here
+    console.log('Deleted with password:', deletePassword.value);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -228,5 +270,32 @@ const mainClasses = computed(() => ({
     /* 使编辑器占满剩余空间 */
     display: flex;
     flex-direction: column;
+}
+
+:deep(.custom-dialog) {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 20vh;
+
+}
+
+:deep(.custom-dialog .el-dialog__header) {
+    background-color: #2d8cf0;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+:deep(.custom-dialog .el-dialog__footer) {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+:deep(.el-dialog__body .el-input) {
+    margin-bottom: 10px;
 }
 </style>
